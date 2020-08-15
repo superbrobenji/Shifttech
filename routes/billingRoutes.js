@@ -9,7 +9,10 @@ module.exports = (app) => {
 		const { card, id } = req.body;
 
 		const isBanned = await BlackListed.findOne({ country: card.country });
-		const existingCard = await Card.findOne({ last4: card.last4 });
+		const existingCard = await Card.findOne({
+			last4: card.last4,
+			_user: req.user,
+		});
 
 		if (existingCard) {
 			res.send({ error: 'This card already exists' });

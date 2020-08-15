@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_CARDS, SHOW_ALERT, FETCH_COUNTRIES } from './types';
+import {
+	FETCH_USER,
+	FETCH_CARDS,
+	SHOW_ALERT,
+	FETCH_COUNTRIES,
+	ADD_BLACKLIST_COUNTRIES,
+} from './types';
 
 export const fetchUser = () => async (dispatch) => {
 	const res = await axios.get('/api/current_user');
@@ -34,4 +40,15 @@ export const fetchCards = () => async (dispatch) => {
 export const fetchCountries = () => async (dispatch) => {
 	const res = await axios.get('/api/countries');
 	dispatch({ type: FETCH_COUNTRIES, payload: res.data });
+};
+
+export const AddToBlacklist = (country) => async (dispatch) => {
+	const res = await axios.post('/api/banned_countries', { country });
+	dispatch({ type: ADD_BLACKLIST_COUNTRIES, payload: res.data });
+};
+
+export const fetchBannedCountries = () => async (dispatch) => {
+	const res = await axios.get('/api/banned_countries');
+	console.log(res.data);
+	dispatch({ type: ADD_BLACKLIST_COUNTRIES, payload: res.data });
 };

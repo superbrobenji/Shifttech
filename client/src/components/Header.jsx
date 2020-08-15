@@ -36,6 +36,7 @@ class Header extends Component {
 					<Link
 						to={this.props.auth ? '/cards' : '/'}
 						className='left brand-logo'
+						style={{ marginLeft: '30px' }}
 					>
 						Shifty
 					</Link>

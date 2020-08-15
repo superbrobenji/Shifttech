@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AddToBlacklist } from '../actions';
+import { AddToBlacklist, removeFromBlacklist } from '../actions';
 
 class Countries extends Component {
 	renderAvailableCountries() {
+		console.log(this.props.countries);
 		const { blacklistedCountries, allCountries } = this.props.countries;
-		let availableCountries = allCountries;
+
+		const availableCountries = [...allCountries];
 		blacklistedCountries.forEach((bannedCountry) => {
 			const index = availableCountries.indexOf(bannedCountry);
 			availableCountries.splice(index, 1);
 		});
+		console.log(blacklistedCountries);
 
 		return availableCountries.map((country) => {
 			return (
@@ -39,7 +42,12 @@ class Countries extends Component {
 					<div className='card-content '>
 						<span className='card-title'>
 							{country}
-							<i className='material-icons right'>delete</i>
+							<div
+								className='btn-flat right'
+								onClick={() => this.props.removeFromBlacklist(country)}
+							>
+								<i className='material-icons right'>delete</i>
+							</div>
 						</span>
 					</div>
 				</div>
@@ -70,4 +78,7 @@ const mapStateToProps = ({ countries }) => {
 	};
 };
 
-export default connect(mapStateToProps, { AddToBlacklist })(Countries);
+export default connect(mapStateToProps, {
+	AddToBlacklist,
+	removeFromBlacklist,
+})(Countries);

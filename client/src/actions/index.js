@@ -52,3 +52,8 @@ export const fetchBannedCountries = () => async (dispatch) => {
 	console.log(res.data);
 	dispatch({ type: ADD_BLACKLIST_COUNTRIES, payload: res.data });
 };
+
+export const removeFromBlacklist = (country) => async (dispatch) => {
+	const res = await axios.post('/api/remove_banned_country', { country });
+	dispatch({ type: ADD_BLACKLIST_COUNTRIES, payload: res.data });
+};

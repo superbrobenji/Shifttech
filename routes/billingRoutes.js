@@ -21,20 +21,21 @@ module.exports = (app) => {
 				res.send({
 					error: 'This country is on the blacklist',
 				});
-			}
-			try {
-				const newCard = await new Card({
-					last4: card.last4,
-					country: card.country,
-					token: id,
-					id: card.id,
-					_user: req.user.id,
-				}).save();
-				const { last4, country } = newCard;
-				res.send({ last4, country, id: newCard.id });
-			} catch (err) {
-				console.log(err);
-				res.status(500).send(err);
+			} else {
+				try {
+					const newCard = await new Card({
+						last4: card.last4,
+						country: card.country,
+						token: id,
+						id: card.id,
+						_user: req.user.id,
+					}).save();
+					const { last4, country } = newCard;
+					res.send({ last4, country, id: newCard.id });
+				} catch (err) {
+					console.log(err);
+					res.status(500).send(err);
+				}
 			}
 		}
 	});

@@ -19,6 +19,9 @@ class Header extends Component {
 					<li key='1'>
 						<AddCard />
 					</li>,
+					<li key='3'>
+						<a href='/blacklist'>Banned Countries</a>
+					</li>,
 					<li key='2'>
 						<a href='/api/logout'>Logout</a>
 					</li>,

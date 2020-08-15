@@ -49,4 +49,20 @@ module.exports = (app) => {
 			res.send(countriesList);
 		});
 	});
+
+	app.post('/api/remove_banned_country', requireLogin, async (req, res) => {
+		const { country } = req.body;
+
+		const deleted = await BlackListed.deleteOne({ country });
+		if (deleted.ok === 1) {
+			BlackListed.find({}, (err, countries) => {
+				var countriesList = [];
+
+				countries.forEach((country) => {
+					countriesList.push(country.country);
+				});
+				res.send(countriesList);
+			});
+		}
+	});
 };

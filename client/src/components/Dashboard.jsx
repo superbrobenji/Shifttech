@@ -1,7 +1,12 @@
 import React from 'react';
+import CardList from './card/CardList';
 
 const Dashboard = () => {
-	return <div>Dashboard view</div>;
+	return (
+		<div>
+			<CardList />
+		</div>
+	);
 };
 
 export default Dashboard;

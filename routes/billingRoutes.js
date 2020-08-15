@@ -35,4 +35,9 @@ module.exports = (app) => {
 			}
 		}
 	});
+
+	app.get('/api/cards', requireLogin, async (req, res) => {
+		const cards = await Card.find({ _user: req.user.id });
+		res.send(cards);
+	});
 };

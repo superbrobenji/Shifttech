@@ -6,10 +6,12 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
+import Countries from './Countries';
 
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
+		this.props.fetchCountries();
 	}
 
 	render() {
@@ -20,6 +22,7 @@ class App extends Component {
 						<Header />
 						<Route exact path='/' component={Landing} />
 						<Route exact path='/cards' component={Dashboard} />
+						<Route exact path='/blacklist' component={Countries} />
 					</div>
 				</BrowserRouter>
 			</div>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_CARDS, SHOW_ALERT } from './types';
+import { FETCH_USER, FETCH_CARDS, SHOW_ALERT, FETCH_COUNTRIES } from './types';
 
 export const fetchUser = () => async (dispatch) => {
 	const res = await axios.get('/api/current_user');
@@ -24,4 +24,14 @@ export const handleToken = (token, cards) => async (dispatch) => {
 
 		dispatch({ type: FETCH_CARDS, payload: newCards });
 	}
+};
+
+export const fetchCards = () => async (dispatch) => {
+	const res = await axios.get('/api/cards');
+	dispatch({ type: FETCH_CARDS, payload: res.data });
+};
+
+export const fetchCountries = () => async (dispatch) => {
+	const res = await axios.get('/api/countries');
+	dispatch({ type: FETCH_COUNTRIES, payload: res.data });
 };
